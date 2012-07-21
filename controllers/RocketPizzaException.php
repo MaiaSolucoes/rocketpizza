@@ -6,8 +6,7 @@
 	 * Time: 03:15
 	 * To change this template use File | Settings | File Templates.
 	 */
-	class Exception extends Exception {
-
+	class RocketPizzaException extends Exception{
 		// Redefine the exception so message isn't optional
 		public function __construct($message, $code = 0, Exception $previous = null) {
 

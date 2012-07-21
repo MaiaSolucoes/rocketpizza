@@ -54,7 +54,7 @@ class Index {
 			} catch (Exception $e) {
 				throw new Exception('Consulta inv&aacute;lida');
 			}
-		} catch (Exception $me) {
+		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 	}
@@ -85,7 +85,7 @@ class Index {
 			} catch (Exception $e) {
 				throw new Exception('Consulta inv&aacute;lida');
 			}
-		} catch (Exception $me) {
+		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 

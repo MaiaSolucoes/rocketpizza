@@ -31,23 +31,16 @@ class Index {
 	 */
 	private static $maintenanceMode;
 
-	/**
-	 * @var EntityMapper
-	 */
 	private $entity;
+
+	private $context;
 
 	/**
 	 * @desc Singleton
 	 */
 	private function __construct() {
-		try {
-			$this->entity = new EntityMapper();
-		} catch(Exception $me) {
-			$errormsg = rawurlencode($me->getMessage());
-		header("Location: not_configured.php?error=$errormsg");
-		}
-
-
+		$this->entity = new EntityMapper();
+		$this->context = __CLASS__;
 	}
 
 	final private function __clone() {}
@@ -71,25 +64,8 @@ class Index {
 	public function getHeaderLogo() {
 
 		try {
-			try {
-				$select = $this->entity->select();
-				$select->setIntegrityCheck(false);
-				$select->from('entityMapper', 'entityMapper.*');
-				$select->from('', 'entityMapperHelper.entityMapperHelperQuery');
-				$select->joinInner('entityMapperHelper', 'entityMapper.entityMapperId = entityMapperHelper.entityMapperId', array());
-				$select->where('entityMapperHelper.entityMapperHelperId = ?', __FUNCTION__);
-
-				$queryRecord = $this->entity->fetchRow($select);
-
-				//print '<pre>'.print_r($queryRecord->getTable()->info('metadata'),true).'</pre>';die($select->__toString());
-				$db = Zend_Db::factory(Config::getAdapter(), Config::getConfigFromEntityMapper($queryRecord));
-				$db->getConnection();
-				$db->setFetchMode(Zend_Db::FETCH_OBJ);
-				$obj = $db->fetchRow($queryRecord->entityMapperHelperQuery);
-			} catch (Exception $e) {
-				throw new Exception('Consulta inv&aacute;lida');
-			}
-		} catch (Exception $me) {
+			$obj = $this->entity->getEntityParameters(__FUNCTION__, 'row', $this->context);
+		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 		return empty($obj) ? '' : "<img class='header_logo' src='" . Site::getPath() . '/' . $obj->head_logo_path . "' alt='" . $obj->description . "'>";
@@ -101,25 +77,8 @@ class Index {
 	public function getHeaderNav() {
 
 		try {
-			try {
-				$select = $this->entity->select();
-				$select->setIntegrityCheck(false);
-				$select->from('entityMapper', 'entityMapper.*');
-				$select->from('', 'entityMapperHelper.entityMapperHelperQuery');
-				$select->joinInner('entityMapperHelper', 'entityMapper.entityMapperId = entityMapperHelper.entityMapperId', array());
-				$select->where('entityMapperHelper.entityMapperHelperId = ?', __FUNCTION__);
-
-				$queryRecord = $this->entity->fetchRow($select);
-
-				//print '<pre>'.print_r($queryRecord->getTable()->info('metadata'),true).'</pre>';die($select->__toString());
-				$db = Zend_Db::factory(Config::getAdapter(), Config::getConfigFromEntityMapper($queryRecord));
-				$db->getConnection();
-				$db->setFetchMode(Zend_Db::FETCH_OBJ);
-				$obj = $db->fetchAll($queryRecord->entityMapperHelperQuery);
-			} catch (Exception $e) {
-				throw new Exception('Consulta inv&aacute;lida');
-			}
-		} catch (Exception $me) {
+			$obj = $this->entity->getEntityParameters(__FUNCTION__, 'all', $this->context);
+		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 		return $obj;
@@ -132,25 +91,8 @@ class Index {
 	 */
 	public function getLayoutConfiguration() {
 		try {
-			try {
-				$select = $this->entity->select();
-				$select->setIntegrityCheck(false);
-				$select->from('entityMapper', 'entityMapper.*');
-				$select->from('', 'entityMapperHelper.entityMapperHelperQuery');
-				$select->joinInner('entityMapperHelper', 'entityMapper.entityMapperId = entityMapperHelper.entityMapperId', array());
-				$select->where('entityMapperHelper.entityMapperHelperId = ?', __FUNCTION__);
-
-				$queryRecord = $this->entity->fetchRow($select);
-
-				//print '<pre>'.print_r($queryRecord,true).'</pre>';die($select->__toString());
-				$db = Zend_Db::factory(Config::getAdapter(), Config::getConfigFromEntityMapper($queryRecord));
-				$db->getConnection();
-				$db->setFetchMode(Zend_Db::FETCH_OBJ);
-				$obj = $db->fetchRow($queryRecord->entityMapperHelperQuery);
-			} catch (Exception $e) {
-				throw new Exception('Consulta inv&aacute;lida');
-			}
-		} catch (Exception $me) {
+			$obj = $this->entity->getEntityParameters(__FUNCTION__, 'row', $this->context);
+		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 
