@@ -19,7 +19,8 @@
 	{include file=$data.layout_config->header_template}
 
 	<div id="content">
-		{$data.content}
+		{include file=$data.content products=$data.price}
+
 	</div>
 
 	{include file=$data.layout_config->footer_template}

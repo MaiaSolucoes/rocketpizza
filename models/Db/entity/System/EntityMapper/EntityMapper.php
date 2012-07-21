@@ -43,11 +43,7 @@ class EntityMapper extends Zend_Db_Table_Abstract {
 			$select->from('', 'entityMapperHelper.entityMapperHelperQuery');
 			$select->joinInner('entityMapperHelper', 'entityMapper.entityMapperId = entityMapperHelper.entityMapperId', array());
 
-			if(is_array($where)) {
-				foreach($where as $parameter) {
-					$select->where('entityMapperHelper.entityMapperHelperId = ?', $parameter);
-				}
-			} else if(!is_null($where)) {
+			if(!is_null($where)) {
 				$select->where('entityMapperHelper.entityMapperHelperId = ?', $where);
 			}
 			$select->where('entityMapperHelper.entityMapperHelperContext = ?', $context);

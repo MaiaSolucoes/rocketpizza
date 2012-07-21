@@ -9,7 +9,7 @@
  */
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/models/Index/Index.php';
 require_once realpath(dirname(dirname(__FILE__))) . '/ControllerInterface.php';
-require_once realpath(dirname(dirname(__FILE__))) . '/Exception.php';
+require_once realpath(dirname(dirname(__FILE__))) . '/RocketPizzaException.php';
 
 class IndexController implements ControllerInterface {
 

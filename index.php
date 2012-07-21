@@ -13,6 +13,7 @@ set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/models', APP
 require_once 'configs/Config.php';
 require_once 'configs/Site.php';
 require_once 'controllers/Index/IndexController.php';
+require_once 'controllers/ProductList/ProductListController.php';
 require_once 'Smarty/Smarty.class.php';
 
 $smarty = new Smarty();
@@ -38,6 +39,10 @@ try {
 
 	$nav = $handler->getHeaderNav();
 	$layout_config = $handler->getLayoutConfiguration();
+
+	$price = new ProductListController();
+	$price->factory();
+	$p = print_r($price->getContent(),1);
 } catch (Exception $e) {
 	$e->getMessage();
 }
@@ -52,8 +57,9 @@ $data = array(
 	'js' 	=> array(Site::getPath() . '/templates/js/main.js'),
 	'logo' 	=> $logo,
 	'nav' 	=> $nav,
-	'content' => $smarty->fetch($page),
-	'title' => Site::getSiteName()
+	'content' => $page,
+	'title' => Site::getSiteName(),
+	'price' => $p
 );
 
 ## SETTING UP CUSTOM LAYOUT CODE 

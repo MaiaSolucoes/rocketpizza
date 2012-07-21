@@ -13,93 +13,50 @@ set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/models', APP
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Config.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Site.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/models/Db/entity/System/EntityMapper/EntityMapper.php';
-require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/Exception.php';
+require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/RocketPizzaException.php';
 require_once 'Zend/Db.php';
 
 /**
  *
  */
-class Index {
+class ProductList {
 
 	/**
-	 * @var Index
+	 * @var ProductList
 	 */
 	private static $instance;
 
-	/**
-	 * @var boolean
-	 */
-	private static $maintenanceMode;
-
-	/**
-	 * @var EntityMapper
-	 */
 	private $entity;
 
+	private $context;
 	/**
 	 * @desc Singleton
 	 */
-	private function __construct() {}
+	private function __construct() {
+		$this->entity = new EntityMapper();
+		$this->context = __CLASS__;
+	}
+
 	final private function __clone() {}
+
+	/**
+	 * @static
+	 * @return ProductList
+	 */
+	public static function getInstance() {
+		if (!self::$instance instanceof ProductList) {
+			self::$instance = new ProductList();
+		}
+		return self::$instance;
+	}
 
 	public function getContent() {
 		try {
-			try {
-				require_once '../Db/entity/Rocketpizza/Product/Product.php';
-				require_once '../Db/entity/Rocketpizza/Product_price/Product_price.php';
-				require_once '../Db/entity/Rocketpizza/Product_size/Product_size.php';
-
-
-
-			} catch (Exception $e) {
-				throw new Exception('Consulta inv&aacute;lida');
-			}
+			return $this->entity->getEntityParameters(__FUNCTION__, 'all', $this->context);
 		} catch (RocketPizzaException $me) {
 			print $me->getMessage();
 		}
 	}
 
-
-	/**
-	 * @return StdClass
-	 */
-	/*
-	 *
-	 public function getLayoutConfiguration() {
-		try {
-			try {
-				$select = $this->entity->select();
-				$select->setIntegrityCheck(false);
-				$select->from('entityMapper', 'entityMapper.*');
-				$select->from('', 'entityMapperHelper.entityMapperHelperQuery');
-				$select->joinInner('entityMapperHelper', 'entityMapper.entityMapperId = entityMapperHelper.entityMapperId', array());
-				$select->where('entityMapperHelper.entityMapperHelperId = ?', __FUNCTION__);
-
-				$queryRecord = $this->entity->fetchRow($select);
-
-				//print '<pre>'.print_r($queryRecord,true).'</pre>';die($select->__toString());
-				$db = Zend_Db::factory(Config::getAdapter(), Config::getConfigFromEntityMapper($queryRecord));
-				$db->getConnection();
-				$db->setFetchMode(Zend_Db::FETCH_OBJ);
-				$obj = $db->fetchRow($queryRecord->entityMapperHelperQuery);
-			} catch (Exception $e) {
-				throw new Exception('Consulta inv&aacute;lida');
-			}
-		} catch (RocketPizzaException $me) {
-			print $me->getMessage();
-		}
-
-		// NO LAYOUT DEFINED, DEFAULT LOADED
-		if ($obj == false) {
-			$obj->name = 'default';
-			$obj->css_source_folder = 'default';
-		}
-
-		$obj->header_template = 'layout/'.$obj->name.'/header.tpl';
-		$obj->footer_template = 'layout/'.$obj->name.'/footer.tpl';
-
-		return $obj;
-	}
-	*/
 
 }

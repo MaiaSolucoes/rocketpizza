@@ -13,7 +13,7 @@ set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/models', APP
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Config.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Site.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/models/Db/entity/System/EntityMapper/EntityMapper.php';
-require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/Exception.php';
+require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/RocketPizzaException.php';
 require_once 'Zend/Db.php';
 
 /**
