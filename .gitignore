@@ -1,5 +1,9 @@
-tmp/*
-config/database.php
-app/tmp/*
-app/config/database.php
-!empty
+cache/*
+templates_c/*
+.idea/*
+.svn/*
+.nbproject/*
+.project/*
+app.sublime-*
+sftp-config.json
+.DS_store
