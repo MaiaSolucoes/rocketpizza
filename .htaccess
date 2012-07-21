@@ -1,0 +1,32 @@
+# ===========
+# = REWRITE =
+# ===========
+# Needed or else you'll get a 403 error
+Options +FollowSymLinks
+
+# Activates mod_rewrite
+RewriteEngine On
+
+# Restrict access from svn
+RewriteRule .svn - [F]
+
+
+RewriteBase /rocketpizza/
+
+#if a file exists then don't rewrite anything
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+) - [PT,L]
+
+#these direct to the appropriate error pages
+ErrorDocument 401 /index.php?section=errors&subsection=401
+ErrorDocument 403 /index.php?section=errors&subsection=403
+ErrorDocument 404 /index.php?section=errors&subsection=404
+
+
+# Grabs the url and feeds the items into a GET call to index.php. %{QUERY_STRING} tags on whatever other GET info was in the URL
+# CONVENTION: /section/entity/subsection/type
+RewriteRule ^([^/\.]+)?/?([^/\.]+)?/?([^/\.]+)?/?([^/\.]+)?/?$ index.php?section=$1&entity=$2&%{QUERY_STRING} [L]
+
+
+#RewriteRule ^pedido\/?(.+)\/?([0-9]*)\/?$ /rocketpizza/index.php?pedido=$1&%{QUERY_STRING} [L]

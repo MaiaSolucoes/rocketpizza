@@ -1,0 +1,42 @@
+#header {
+	width: 1000px;
+	height: 150px;
+	background: #FFF;
+	float: left;
+}
+
+#logo {
+	width: 250px;
+	height: 100px;
+	float: left;
+}
+
+#logo img.header_logo {
+	width: 250px;
+	height: 100px;
+}
+
+/* MENU */
+#menu_bar {
+	clear: both;
+	width: 1000px;
+	background: #333;
+	float: left;
+}
+
+#menu_bar a.option_header_menu:link, 
+#menu_bar a.option_header_menu:visited {
+	font: bold 12px "Arial";
+	color: #FFF;
+	padding: 15px;
+	float: left;
+	margin: 2px;
+	text-decoration: none;
+}
+
+#menu_bar a.option_header_menu:hover, 
+#menu_bar a.option_header_menu:active {
+	background: #000;
+	color: #FF0;
+	text-decoration: none;
+}
