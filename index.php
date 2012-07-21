@@ -9,7 +9,6 @@
  */
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/models', APPLICATION_PATH . '/controllers', APPLICATION_PATH . '/templates', APPLICATION_PATH . '/libs', get_include_path())));
-print '<pre>'.print_r(get_include_path(),1).'</pre>';
 
 require_once 'configs/Config.php';
 require_once 'configs/Site.php';
@@ -39,7 +38,7 @@ try {
 
 	$nav = $handler->getHeaderNav();
 	$layout_config = $handler->getLayoutConfiguration();
-} catch (MaiaException $e) {
+} catch (Exception $e) {
 	$e->getMessage();
 }
 

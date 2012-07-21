@@ -6,7 +6,7 @@
 	 * Time: 03:15
 	 * To change this template use File | Settings | File Templates.
 	 */
-	class MaiaException extends Exception {
+	class Exception extends Exception {
 
 		// Redefine the exception so message isn't optional
 		public function __construct($message, $code = 0, Exception $previous = null) {

@@ -13,7 +13,7 @@ set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/models', APP
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Config.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/configs/Site.php';
 require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/models/Db/entity/System/EntityMapper/EntityMapper.php';
-require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/MaiaException.php';
+require_once realpath(dirname(dirname(dirname(__FILE__)))) . '/controllers/Exception.php';
 require_once 'Zend/Db.php';
 
 /**
@@ -42,7 +42,7 @@ class Index {
 	private function __construct() {
 		try {
 			$this->entity = new EntityMapper();
-		} catch(MaiaException $me) {
+		} catch(Exception $me) {
 			$errormsg = rawurlencode($me->getMessage());
 		header("Location: not_configured.php?error=$errormsg");
 		}
@@ -87,9 +87,9 @@ class Index {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ);
 				$obj = $db->fetchRow($queryRecord->entityMapperHelperQuery);
 			} catch (Exception $e) {
-				throw new MaiaException('Consulta inv&aacute;lida');
+				throw new Exception('Consulta inv&aacute;lida');
 			}
-		} catch (MaiaException $me) {
+		} catch (Exception $me) {
 			print $me->getMessage();
 		}
 		return empty($obj) ? '' : "<img class='header_logo' src='" . Site::getPath() . '/' . $obj->head_logo_path . "' alt='" . $obj->description . "'>";
@@ -117,9 +117,9 @@ class Index {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ);
 				$obj = $db->fetchAll($queryRecord->entityMapperHelperQuery);
 			} catch (Exception $e) {
-				throw new MaiaException('Consulta inv&aacute;lida');
+				throw new Exception('Consulta inv&aacute;lida');
 			}
-		} catch (MaiaException $me) {
+		} catch (Exception $me) {
 			print $me->getMessage();
 		}
 		return $obj;
@@ -148,9 +148,9 @@ class Index {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ);
 				$obj = $db->fetchRow($queryRecord->entityMapperHelperQuery);
 			} catch (Exception $e) {
-				throw new MaiaException('Consulta inv&aacute;lida');
+				throw new Exception('Consulta inv&aacute;lida');
 			}
-		} catch (MaiaException $me) {
+		} catch (Exception $me) {
 			print $me->getMessage();
 		}
 

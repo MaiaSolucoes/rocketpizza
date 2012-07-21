@@ -25,7 +25,7 @@ class EntityMapper extends Zend_Db_Table_Abstract {
 
 			parent::__construct();
 		} catch(Exception $e) {
-			throw new MaiaException('Sistema nao configurado. Procure o administrador e informe este erro: SYSTEM_NOT_FOUND');
+			throw new Exception('Sistema nao configurado. Procure o administrador e informe este erro: SYSTEM_NOT_FOUND');
 		}
 	}
 
