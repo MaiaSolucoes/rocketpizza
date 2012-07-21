@@ -19,5 +19,6 @@
 		 * @abstract
 		 * @param boolean $maintenanceMode
 		 * @return mixed
-		 */public function factory($maintenanceMode = false);
+		 */
+		public function factory($maintenanceMode = false);
 	}
